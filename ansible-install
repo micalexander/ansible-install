@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+if [[ -z "${1}" ]]; then
+        echo Please provide github account i.e. [micalexander/ansible-pull-neovim]
+        exit 1;
+fi
+
+curl -o /tmp/requirements.yml https://raw.githubusercontent.com/${1}/master/requirements.yml
+
+if [[ -f "/tmp/requirements.yml" ]]; then
+        ansible-galaxy install -r /tmp/requirements.yml
+else
+        echo unable to install requirements
+        exit 1;
+fi
+
+ansible-pull -U https://github.com/${1}.git -i inventory -K -vvv
