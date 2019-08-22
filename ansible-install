@@ -14,4 +14,4 @@ else
         exit 1;
 fi
 
-ansible-pull -U https://github.com/${1}.git -i inventory -K -vvv
+ansible-pull -U https://github.com/${1}.git -i inventory -K
